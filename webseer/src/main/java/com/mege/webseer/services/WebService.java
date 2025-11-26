@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -32,6 +33,7 @@ public class WebService {
         if(foundedWeb.isPresent()){
             Web web = foundedWeb.get();
             web.setNumberOfAccess(web.getNumberOfAccess() + 1);
+            web.setLastAccess(Instant.now());
 
             webRepository.save(web);
             return ResponseEntity.ok().build();
@@ -40,6 +42,7 @@ public class WebService {
         Web web = new Web();
         web.setNumberOfAccess(1);
         web.setUrl(url);
+        web.setLastAccess(Instant.now());
 
         user.getWebList().add(web);
         web.setUser(user);

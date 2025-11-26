@@ -71,9 +71,4 @@ public class Web {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @PrePersist
-    private void setInstant(){
-        this.lastAccess = Instant.now();
-    }
 }
