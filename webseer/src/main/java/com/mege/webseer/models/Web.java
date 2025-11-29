@@ -15,17 +15,19 @@ public class Web {
     private String url;
     private Integer numberOfAccess;
     private Instant lastAccess;
+    private String mode;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
 
-    public Web(String id, String url, Integer numberOfAccess, Instant lastAccess, User user) {
+    public Web(String id, String url, Integer numberOfAccess, Instant lastAccess, String mode, User user) {
         this.id = id;
         this.url = url;
         this.numberOfAccess = numberOfAccess;
         this.lastAccess = lastAccess;
+        this.mode = mode;
         this.user = user;
     }
 
@@ -70,5 +72,13 @@ public class Web {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 }

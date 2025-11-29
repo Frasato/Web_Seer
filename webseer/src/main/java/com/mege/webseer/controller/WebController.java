@@ -20,6 +20,6 @@ public class WebController {
 
     @PostMapping
     public ResponseEntity<?> saveUrlByUser(@RequestBody RequestCreateUrlByUserDto createUrlByUserDto){
-        return webService.addWeb(createUrlByUserDto.userId(), createUrlByUserDto.url());
+        return webService.addWeb(createUrlByUserDto.userId(), createUrlByUserDto.url(), createUrlByUserDto.mode());
     }
 }

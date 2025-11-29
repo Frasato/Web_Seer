@@ -23,7 +23,7 @@ public class WebService {
         return ResponseEntity.ok(webRepository.findAllWebByUserId(userId));
     }
 
-    public ResponseEntity<?> addWeb(String userId, String url){
+    public ResponseEntity<?> addWeb(String userId, String url, String mode){
         Optional<Web> foundedWeb = webRepository.findByUrl(url);
         Optional<User> foundedUser = userRepository.findById(userId);
         if(foundedUser.isEmpty()) return ResponseEntity.notFound().build();
@@ -42,6 +42,7 @@ public class WebService {
         Web web = new Web();
         web.setNumberOfAccess(1);
         web.setUrl(url);
+        web.setMode(mode);
         web.setLastAccess(Instant.now());
 
         user.getWebList().add(web);
