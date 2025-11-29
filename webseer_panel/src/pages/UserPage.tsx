@@ -59,6 +59,7 @@ const UserPage = () =>{
                 </a>
                 <h1>Último Acesso: {item.lastAccess}</h1>
                 <h2>Número de Acessos: {item.numberOfAccess}</h2>
+                <h2>Modo: {item.mode}</h2>
             </div>
             ))}
         </main>
