@@ -31,7 +31,7 @@ function inicializarLogica() {
       }
 
       console.log("Página visitada:", tab.url);
-      await enviarUrlParaAPI(tab.url);
+      await enviarUrlParaAPI(tab.url, tab.incognito);
     }
   });
 
@@ -39,12 +39,12 @@ function inicializarLogica() {
     const tab = await chrome.tabs.get(activeInfo.tabId);
     if (tab.url && !tab.url.startsWith("chrome://") && !tab.url.startsWith("chrome-extension://")) {
       console.log("Aba ativada:", tab.url);
-      await enviarUrlParaAPI(tab.url);
+      await enviarUrlParaAPI(tab.url, tab.incognito);
     }
   });
 }
 
-async function enviarUrlParaAPI(url) {
+async function enviarUrlParaAPI(url, incognito) {
   try {
     const { userId } = await chrome.storage.sync.get("userId");
 
@@ -60,7 +60,8 @@ async function enviarUrlParaAPI(url) {
       },
       body: JSON.stringify({
         userId: userId,
-        url: url
+        url: url,
+        mode: incognito == true? "anônimo" : "normal"
       })
     });
 
